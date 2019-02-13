@@ -1,0 +1,43 @@
+/* VINA NICOLETA 325CD */
+
+	In cadrul primei probleme ("Frati") am adoptat o abordare de tip greedy,
+astfel: pentru fiecare pereche citita din fisierul de intrare am realizat suma
+elementelor si am adaugat elemente de tip structura "game" intr-un vector. Apoi
+am sortat acest vector descrescator dupa suma, intrucat pentru a fi indeplinite
+conditiile din enunt este de ajuns ca concursurile sa se aleaga in functie de
+maximul disponibil al acestei sume la momentul alegerii. Pentru elementele de
+suma egala, acestea sunt soratate descrescator dupa nr de jocuri, adica pentru
+Jon. Fiind sortate astfel, daca sunt privite in ordine inversa se observa ca sunt
+deja sortate si dupa preferintele lui Sam, adica dupa nr de benzi (suma fiind
+aceeasi, daca nr de jocuri e mai mare, atunci nr de benzi va fi mai mic). Pentru
+a sti al cui e randul sa aleaga, am utilizat o variabila "ok" ce are valoarea 1
+pt Jon si 0 pt Sam, ce este actualizata dupa fiecare alegere.
+	Am iterat apoi prin vectorul de concursuri format si, daca nu urmeaza o
+bucata cu sume egale, atunci elementul doar se adauga la rezultatul corespunzator.
+Pentru fiecare bucata ce contine elemente cu suma egala, am utilizat o structura
+de tip "deque", ce permite efectuarea operatiilor front, pop_front, back, pop_back
+astfel incat sa se pastreze complexitatea (polinomiala): se adauga elementele,
+apoi pentru Jon se itereaza prin aceasta structura din fata (cu front si
+pop_front), iar pentru Sam, din spate (cu back si pop_back), astfel fiind eliminate
+concursurile ce au fost deja alese. Cand se goleste deque-ul, se revine in
+vectorul mare si se continua de dupa aceasta bucata prelucrata, pana la final.
+
+	In cadrul problemei 3 ("Planificare") am utilizat o abordare greedy (desi ar
+fi fost mai eficienta programarea dinamica). Am citit pe rand duratele probelor
+si am verificat mereu daca, adunand-o (impreuna cu durata B a pauzei) la totalul
+curent, ar depasi durata D a unui concurs. Daca da, se incrementeaza numarul de
+concursuri si se adauga pierderea curenta la pierderile totale, resetandu-se
+totalul la durata curenta a probei. Daca nu, doar se adauga (durata + pauza) la
+totalul curent si se continua verificarile. Pentru ultimul concurs nu se mai adauga
+nimic la pierderile totale si nu se mai updateaza nici numarul de concursuri,
+deoarece acest caz a fost luat deja in calcul cand s-a pornit cu n = 1. La final
+se scriu cele doua rezultate in fisierul de iesire, rezultand o complexitate
+temporala de O(n)-polinomiala.
+
+	In problema a patra ("Numaratoare") se genereaza toate posibilitatile de
+insumare prin programare dinamica, numarandu-se insa doar cele care contin un
+numar de n termeni. Paritia urmatoare este generata in functie de partitia curenta. 
+	Cand k (indexul ultimului element din partitie) este 0, nu mai sunt partitii,
+intrucat toti termenii exprimarii curente sunt egali cu 1. Cand s-a ajuns la a
+"i"-a exprimare, aceasta se scrie in fisier si programul se incheie, avand
+complexitate polinomiala.
